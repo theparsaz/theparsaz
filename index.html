@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>theparsaz</title>
+<style>
+:root{--bg:#07111e;--panel:#0b1727;--panel2:#101e30;--green:#55f29a;--green2:#24c978;--text:#dce8f4;--muted:#8fa4ba;--line:#1d3448}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 20% 0%,#0b2034 0,transparent 42%),var(--bg);color:var(--text);font-family:Consolas,"Courier New",monospace}
+a{color:var(--green);text-decoration:none}
+a:hover{color:#a4ffd0}
+header{position:sticky;top:0;z-index:10;background:rgba(7,17,30,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{max-width:1100px;margin:auto;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-weight:bold;letter-spacing:1px;color:var(--green);font-size:1.1rem}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{font-size:.9rem;color:var(--muted);transition:.2s}
+nav a:hover{color:var(--green)}
+main{max-width:1100px;margin:auto;padding:30px 22px 80px}
+.hero{min-height:72vh;display:grid;grid-template-columns:310px 1fr;align-items:center;gap:55px;padding:45px 0}
+.photo-wrap{width:100%;max-width:310px;aspect-ratio:1;border-radius:18px;padding:3px;background:linear-gradient(140deg,var(--green),#143c2b);box-shadow:0 0 18px #55f29a22;animation:glow 4s ease-in-out infinite}
+.photo-wrap img{width:100%;height:100%;object-fit:cover;border-radius:15px;display:block}
+@keyframes glow{0%,100%{box-shadow:0 0 14px #55f29a22}50%{box-shadow:0 0 25px #55f29a44}}
+.eyebrow{color:var(--green);font-size:.88rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);margin:14px 0;color:#f1f7ff;letter-spacing:-1px}
+.lead{color:var(--muted);font-size:1.05rem}
+.terminal-line{color:var(--green);margin-top:25px}
+.cursor{display:inline-block;width:9px;height:1em;background:var(--green);vertical-align:-2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+section{margin:55px 0;scroll-margin-top:90px}
+.section-title{font-size:1.5rem;color:var(--green);margin-bottom:18px}
+.panel{background:linear-gradient(180deg,var(--panel),#081421);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 14px 35px #0002}
+.terminal-head{display:flex;gap:7px;margin-bottom:18px}
+.dot{width:9px;height:9px;border-radius:50%;background:#31516b}
+.terminal-body{line-height:1.9;color:var(--green);white-space:pre-wrap;min-height:190px}
+.about-output{color:#b9f7d4}
+.timeline-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.stat{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:24px}
+.stat-label{color:var(--green);font-size:.85rem}
+.stat-value{font-size:2.5rem;font-weight:bold;margin:12px 0;color:#eaf5ff}
+.stat-sub{font-size:.8rem;color:var(--muted)}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.contact-item{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:17px;transition:.2s}
+.contact-item:hover{border-color:var(--green);transform:translateY(-2px)}
+.contact-item small{display:block;color:var(--muted);margin-bottom:7px}
+footer{text-align:center;color:#61788e;border-top:1px solid var(--line);padding:25px 10px;font-size:.8rem}
+@media(max-width:720px){.nav{padding:14px 16px;align-items:flex-start}.nav{flex-direction:column}nav{gap:14px}.hero{grid-template-columns:1fr;gap:28px;min-height:auto;padding:28px 0}.photo-wrap{max-width:230px;margin:auto}.hero-text{text-align:center}.timeline-grid,.contact-grid{grid-template-columns:1fr}main{padding:24px 16px 60px}.panel{padding:18px}}
+
+
+.music-feature{display:grid;grid-template-columns:minmax(220px,330px) 1fr;gap:28px;align-items:center;background:linear-gradient(135deg,#0a1727,#07111e);border:1px solid #1d3448;border-radius:18px;padding:24px;overflow:hidden}
+.music-cover{aspect-ratio:1;position:relative;display:flex;justify-content:center;align-items:center;border-radius:14px;overflow:hidden;background:#030509;border:1px solid #2b5745;box-shadow:0 0 24px #55f29a16;padding:12px}
+.dorcci-logo{width:100%;height:100%;object-fit:contain;display:block}
+.music-info{min-width:0}
+.music-info audio{width:100%;max-width:440px;accent-color:#55f29a}
+@media(max-width:720px){.music-feature{grid-template-columns:1fr;gap:20px;padding:18px}.music-cover{max-width:100%;width:100%;aspect-ratio:1}.music-info audio{max-width:100%}}
+ .music-info{min-width:0}
+/* terminal-style custom music controls */
+.music-terminal{background:#06111b;border:1px solid #244056;border-radius:12px;overflow:hidden;box-shadow:0 0 22px #55f29a0d;max-width:540px}
+.music-terminal-head{display:flex;align-items:center;gap:7px;padding:11px 13px;border-bottom:1px solid #203649;background:#0a1725}
+.music-terminal-head .dot{width:9px;height:9px;border-radius:50%;background:#34536b}
+.music-terminal-title{margin-left:auto;color:#7792a9;font-size:.72rem;letter-spacing:.4px}
+.music-terminal-body{padding:15px;color:var(--green);font-size:.82rem}
+.music-command{color:#55f29a;margin-bottom:12px;word-break:break-word}
+.music-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.music-play{border:1px solid #3a8865;background:#0c241d;color:#55f29a;border-radius:6px;padding:9px 14px;font:inherit;font-weight:bold;cursor:pointer;transition:.2s}
+.music-play:hover,.music-play:focus-visible{background:#153c2c;box-shadow:0 0 12px #55f29a26;outline:none}
+.music-play:active{transform:translateY(1px)}
+.music-progress-wrap{display:flex;align-items:center;gap:9px;flex:1;min-width:150px;color:#91a9be;font-size:.72rem}
+.music-progress{width:100%;accent-color:#55f29a;cursor:pointer}
+.music-status{margin-top:12px;color:#68859b;font-size:.72rem}
+.music-status .status-green{color:#55f29a}
+.music-terminal audio{display:none}
+@media(max-width:720px){.music-feature{grid-template-columns:1fr;gap:20px;padding:18px}.music-cover{max-width:100%;width:100%;aspect-ratio:1}.music-terminal{max-width:100%}.music-progress-wrap{min-width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="#home">theparsaz</a>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#music">Music</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero" id="home">
+    <div class="photo-wrap"><img src="profile_photo.jpg" alt="Parsa profile"></div>
+    <div class="hero-text">
+      <div class="eyebrow">// WHO IS PARSA?</div>
+      <h1>Welcome to theparsaz</h1>
+      <p class="lead">A glimpse into the world of Parsa.</p>
+      <div class="terminal-line">root@theparsaz:~$ whoami <span class="cursor"></span></div>
+      <p class="lead">Curious mind. Different perspective.</p>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">// About</h2>
+    <div class="panel">
+      <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <div class="terminal-body" id="about-terminal"></div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <h2 class="section-title">// Timeline</h2>
+    <div class="timeline-grid">
+      <div class="stat">
+        <div class="stat-label">TODAY</div>
+        <div class="stat-value">2 Hours</div>
+        <div class="stat-sub">Today's work time</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">THIS WEEK</div>
+        <div class="stat-value">10 Hours</div>
+        <div class="stat-sub">Total weekly work time</div>
+      </div>
+    </div>
+  </section>
+
+
+    <section id="music">
+    <h2 class="section-title">// Favorite Music</h2>
+    <div class="music-feature">
+      <div class="music-cover">
+        <img class="dorcci-logo" src="dorcci-logo.png" alt="DORCCI icy logo">
+      </div>
+      <div class="music-info">
+        <div class="music-terminal">
+          <div class="music-terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="music-terminal-title">music-player — bash</span></div>
+          <div class="music-terminal-body">
+            <div class="music-command">root@theparsaz:~$ music --play favorite</div>
+            <div class="music-controls">
+              <button class="music-play" id="music-play" type="button" aria-label="Play music">▶ PLAY</button>
+              <div class="music-progress-wrap"><span id="music-current">00:00</span><input class="music-progress" id="music-progress" type="range" min="0" max="100" value="0" aria-label="Track progress"><span id="music-duration">00:00</span></div>
+            </div>
+            <div class="music-status">status: <span class="status-green" id="music-status">ready</span> <span id="music-cursor">_</span></div>
+          </div>
+        </div>
+        <audio id="favorite-audio" preload="metadata" aria-label="Favorite music audio">
+          <source src="favorite-music.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">// Contact</h2>
+    <div class="contact-grid">
+      <a class="contact-item" href="tel:09016902248"><small>PHONE</small>09016902248</a>
+      <a class="contact-item" href="mailto:theparsaz00@gmail.com"><small>EMAIL</small>theparsaz00@gmail.com</a>
+      <a class="contact-item" href="https://instagram.com/theparsaz0" target="_blank" rel="noopener"><small>INSTAGRAM</small>@theparsaz0</a>
+      <a class="contact-item" href="https://t.me/theparsaz0" target="_blank" rel="noopener"><small>TELEGRAM</small>@theparsaz0</a>
+    </div>
+  </section>
+</main>
+<footer>root@theparsaz:~$ exit &nbsp; • &nbsp; © theparsaz</footer>
+<script>
+const lines = [
+  "root@theparsaz:~$ whoami",
+  "root@theparsaz:~$ cat about.txt",
+  "Name: Parsa",
+  "Interest: Technology",
+  "Direction: Networking",
+  "root@theparsaz:~$ exit"
+];
+const terminal = document.getElementById("about-terminal");
+let lineIndex = 0, charIndex = 0, timer;
+function typeLine(){
+  if(lineIndex >= lines.length) return;
+  const line = lines[lineIndex];
+  if(charIndex < line.length){
+    terminal.textContent += line.charAt(charIndex++);
+    timer = setTimeout(typeLine, 42);
+  } else {
+    terminal.textContent += "\n";
+    lineIndex++; charIndex=0;
+    timer = setTimeout(typeLine, 420);
+  }
+}
+let played = false;
+const about = document.getElementById("about");
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting && !played){
+      played=true; typeLine();
+    }
+  });
+},{threshold:.25});
+observer.observe(about);
+document.querySelector('a[href="#about"]').addEventListener("click",()=>{
+  if(played){clearTimeout(timer);terminal.textContent="";lineIndex=0;charIndex=0;played=false;}
+});
+
+// Terminal-inspired music player controls
+const favoriteAudio = document.getElementById('favorite-audio');
+const playBtn = document.getElementById('music-play');
+const progress = document.getElementById('music-progress');
+const currentTimeEl = document.getElementById('music-current');
+const durationEl = document.getElementById('music-duration');
+const statusEl = document.getElementById('music-status');
+function formatMusicTime(value){
+  if(!Number.isFinite(value)) return '00:00';
+  const mins=Math.floor(value/60), secs=Math.floor(value%60);
+  return String(mins).padStart(2,'0')+':'+String(secs).padStart(2,'0');
+}
+playBtn.addEventListener('click', async ()=>{
+  if(favoriteAudio.paused){
+    try{ await favoriteAudio.play(); }catch(e){ statusEl.textContent='audio unavailable'; }
+  }else favoriteAudio.pause();
+});
+favoriteAudio.addEventListener('play',()=>{playBtn.textContent='❚❚ PAUSE';playBtn.setAttribute('aria-label','Pause music');statusEl.textContent='playing';});
+favoriteAudio.addEventListener('pause',()=>{playBtn.textContent='▶ PLAY';playBtn.setAttribute('aria-label','Play music');statusEl.textContent=favoriteAudio.ended?'finished':'paused';});
+favoriteAudio.addEventListener('loadedmetadata',()=>{durationEl.textContent=formatMusicTime(favoriteAudio.duration);});
+favoriteAudio.addEventListener('timeupdate',()=>{currentTimeEl.textContent=formatMusicTime(favoriteAudio.currentTime);if(Number.isFinite(favoriteAudio.duration)&&favoriteAudio.duration>0)progress.value=(favoriteAudio.currentTime/favoriteAudio.duration)*100;});
+progress.addEventListener('input',()=>{if(Number.isFinite(favoriteAudio.duration)&&favoriteAudio.duration>0)favoriteAudio.currentTime=(Number(progress.value)/100)*favoriteAudio.duration;});
+favoriteAudio.addEventListener('ended',()=>{playBtn.textContent='▶ PLAY';playBtn.setAttribute('aria-label','Play music');statusEl.textContent='finished';progress.value=0;});
+
+</script>
+</body>
+</html>
